@@ -1,0 +1,18 @@
+.item{
+  padding: 1vw;
+  box-shadow: var(--shadow-color) 0px 7px 29px 0px;
+  width: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1vw;
+  border-radius: 0.5vw;
+}
+
+.item span.expenses{
+  color: red;
+}
+
+.item span.income{
+  color: red;
+}

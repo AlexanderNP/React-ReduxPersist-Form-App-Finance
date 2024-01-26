@@ -1,0 +1,62 @@
+.app{
+
+  --main-color: #fff;
+  --shadow-color: rgba(100, 100, 111, 0.5);
+  --text: black;
+
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3vw;
+  font-size: 1vw;
+  background-color: var(--main-color);
+  color: var(--text);
+}
+
+.app.dark{
+  --text: #fff;
+  --main-color: rgb(21, 21, 21);
+  --shadow-color: rgba(227, 227, 228, 0.5);
+}
+
+.buttonContain{
+  display: flex;
+  width: 20vw;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2vw;
+}
+
+.buttonContain button{
+  font-size: 1vw;
+  border-radius: 0.3vw;
+  padding: 0.4vw;
+  cursor: pointer;
+  align-self: flex-start;
+  border: 0.2vw solid rgb(64, 144, 235);
+  background-color: transparent;
+  color: var(--text);
+}
+
+.buttonContain button.active{
+  background-color: rgb(64, 144, 235);
+  color: #fff;
+}
+
+.themeButton{
+  position: absolute;
+  bottom: 2vw;
+  right: 2vw;
+  font-size: 1.5vw;
+  background-color: transparent;
+  box-shadow: var(--shadow-color) 0px 5px 15px;;
+  cursor: pointer;
+  padding: 1vw;
+  border-radius: 0.3vw;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
