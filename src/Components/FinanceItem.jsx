@@ -1,4 +1,4 @@
-import styles from './FinanceItem.module.css'
+import styles from './FinanceItem.module.css';
 
 export function FinanceItem({title, money, status}){
   return(
@@ -8,5 +8,5 @@ export function FinanceItem({title, money, status}){
       <span style={{ color: 'blue' }}>+{money}</span>: 
       <span style={{ color: 'red' }}>-{money}</span>}
     </div>
-  )
+  );
 }

@@ -22,7 +22,7 @@ export const balanceSlice = createSlice({
       state['expenses'] += Number(action.payload.money);
     }
   }
-})
+});
 
 export const { addBalance, addIncome, addExpenses } = balanceSlice.actions;
 export default balanceSlice.reducer;

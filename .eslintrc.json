@@ -1,0 +1,20 @@
+{
+  "extends": [
+      "react-app"
+  ],
+  "rules": {
+      "no-console": "warn",
+      "no-alert": "warn",
+      "quotes": ["warn", "single"],
+      "jsx-quotes": ["warn", "prefer-double"],
+      "prefer-const": "warn",
+      "max-len": ["warn", {"code": 120}],
+      "comma-dangle": ["warn", "never"],
+      "semi": ["warn", "always"]
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}

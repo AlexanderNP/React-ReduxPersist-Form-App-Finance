@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import { setThemeStorage } from "../store/themeSlice";
+import { useDispatch, useSelector } from 'react-redux';
+import { setThemeStorage } from '../store/themeSlice';
 
 export function useTheme(){
   
   const dispatch = useDispatch();
-  let stateTheme = useSelector(state => state.theme['theme'])
+  const stateTheme = useSelector(state => state.theme['theme']);
 
 
   function changeTheme(){
-    let newTheme = stateTheme === 'light' ? 'dark' : 'light'
-    dispatch(setThemeStorage({theme: newTheme}))
+    const newTheme = stateTheme === 'light' ? 'dark' : 'light';
+    dispatch(setThemeStorage({theme: newTheme}));
   }
 
-  return [stateTheme, changeTheme]
+  return [stateTheme, changeTheme];
 }

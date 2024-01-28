@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import themeReducer from './store/themeSlice';
@@ -25,13 +25,13 @@ describe('Отправка формы - появление операций', ()
     );
 
     const form = screen.getByTestId('form');
-    fireEvent.submit(form);
 
-    await waitFor(() => {
-      expect(screen.queryByTestId('operations')).toBeNull();
+    await act(async () => {
+      fireEvent.submit(form);
     });
 
-  })
+    expect(screen.queryByTestId('operations')).toBeNull();
+  });
 
   it('Форма с пробелами', async () => {
     render(
@@ -41,18 +41,18 @@ describe('Отправка формы - появление операций', ()
     );
 
     const form = screen.getByTestId('form');
-    const input = screen.getByRole('textbox', { type: 'text' });
+    const input = screen.getByTestId('inputTitle');
 
-    fireEvent.change(input, {
-      target: {
-        value: '   '
-      }
+    await act(async () => {
+      fireEvent.change(input, {
+        target: {
+          value: '   '
+        }
+      });
+      fireEvent.submit(form);
     });
-    fireEvent.submit(form);
 
-    await waitFor(() => {
-      expect(screen.queryByTestId('operations')).toBeNull();
-    });
+    expect(screen.queryByTestId('operations')).toBeNull();
   });
 
   it('Форма с денежной операцией = 0', async () => {
@@ -63,18 +63,18 @@ describe('Отправка формы - появление операций', ()
     );
 
     const form = screen.getByTestId('form');
-    const input = screen.getByRole('textbox', { type: 'number' });
+    const inputMoney = screen.getByTestId('inputMoney');
 
-    fireEvent.change(input, {
-      target: {
-        value: '0'
-      }
+    await act(async () => {
+      fireEvent.change(inputMoney, {
+        target: {
+          value: '0'
+        }
+      });
+      fireEvent.submit(form);
     });
-    fireEvent.submit(form);
 
-    await waitFor(() => {
-      expect(screen.queryByTestId('operations')).toBeNull();
-    });
+    expect(screen.queryByTestId('operations')).toBeNull();
   });
 
   it('Форма с денежной операцией < 0', async () => {
@@ -85,18 +85,18 @@ describe('Отправка формы - появление операций', ()
     );
 
     const form = screen.getByTestId('form');
-    const input = screen.getByRole('textbox', { type: 'number' });
+    const inputMoney = screen.getByTestId('inputMoney');
 
-    fireEvent.change(input, {
-      target: {
-        value: '-1'
-      }
+    await act(async () => {
+      fireEvent.change(inputMoney, {
+        target: {
+          value: '-1'
+        }
+      });
+      fireEvent.submit(form);
     });
-    fireEvent.submit(form);
 
-    await waitFor(() => {
-      expect(screen.queryByTestId('operations')).toBeNull();
-    });
+    expect(screen.queryByTestId('operations')).toBeNull();
   });
 
   it('Форма заполненная', async () => {
@@ -107,26 +107,17 @@ describe('Отправка формы - появление операций', ()
     );
 
     const form = screen.getByTestId('form');
-    const input = screen.getByRole('textbox', { type: 'text' });
-    const inputMoney = screen.getByRole('textbox', { type: 'number' });
+    const input = screen.getByTestId('inputTitle');
+    const inputMoney = screen.getByTestId('inputMoney');
 
-    fireEvent.change(input, {
-      target: {
-        value: 'Операция'
-      }
+    await act(async () => {
+      fireEvent.change(input, { target: { value: 'Операция' } });
+      fireEvent.change(inputMoney, { target: { value: '500' } });
+      fireEvent.submit(form);
     });
 
-    fireEvent.change(inputMoney, {
-      target: {
-        value: '500'
-      }
-    });
+    expect(screen.getByTestId('operations')).toBeInTheDocument();
 
-    fireEvent.submit(form);
-
-    await waitFor(() => {
-      expect(screen.getByTestId('operations')).toBeInTheDocument();
-    });
   });
 
 });

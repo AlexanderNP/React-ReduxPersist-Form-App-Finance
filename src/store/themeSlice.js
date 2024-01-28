@@ -10,7 +10,7 @@ export const themeSlice = createSlice({
       state['theme'] = action.payload.theme;
     }
   }
-})
+});
 
 export const { setThemeStorage } = themeSlice.actions;
 export default themeSlice.reducer;
